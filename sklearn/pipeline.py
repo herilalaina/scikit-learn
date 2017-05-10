@@ -14,7 +14,7 @@ from collections import defaultdict
 import numpy as np
 from scipy import sparse
 
-from .base import clone, TransformerMixin
+from .base import clone, TransformerMixin, BaseEstimator
 from .externals.joblib import Parallel, delayed, Memory
 from .externals import six
 from .utils import tosequence
@@ -828,3 +828,21 @@ def make_union(*transformers, **kwargs):
         raise TypeError('Unknown keyword arguments: "{}"'
                         .format(list(kwargs.keys())[0]))
     return FeatureUnion(_name_estimators(transformers), n_jobs=n_jobs)
+
+
+class TargetTransformer(BaseEstimator):
+    """Transformer for target values
+    """
+    def __init__(self, estimator, funcTransformer):
+        self.estimator = estimator
+        self.funcTransformer = funcTransformer
+
+    def fit(self, X, y):
+        self.estimator.fit(X, self.funcTransformer.transform(y))
+
+    def predict(self, X):
+        return self.estimator.predict(X)
+
+    def predict_raw(self, X):
+        return self.funcTransformer.inverse_transform(
+            self.estimator.predict(X))
