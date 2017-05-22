@@ -831,7 +831,16 @@ def make_union(*transformers, **kwargs):
 
 
 class TargetTransformer(BaseEstimator):
-    """Transformer for target values
+    """Transformer for target values.
+
+    Parameters
+    ----------
+    estimator : estimator object
+        An estimator object implementing `fit` and `predict`
+
+    funcTransformer : `sklearn.preprocessing.FunctionTransformer` object
+        A function transformer implementing `transform` and `inverse_transform`
+
     """
     def __init__(self, estimator, funcTransformer):
         self.estimator = estimator
