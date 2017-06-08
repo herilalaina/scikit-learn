@@ -318,6 +318,10 @@ Bug fixes
    - Fixed a memory leak in our LibLinear implementation. :issue:`9024` by
      :user:`Sergei Lebedev <superbobry>`
 
+   - Fixed a bug when :func:`sklearn.datasets.make_classification` fails 
+     when generating more than 30 features. :issue:`8159` by
+     :user:`Herilalaina Rakotoarison <herilalaina>`
+
 API changes summary
 -------------------
 
