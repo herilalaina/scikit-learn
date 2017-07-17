@@ -1388,7 +1388,7 @@ def check_class_weight_classifiers(name, classifier_orig):
 
 @ignore_warnings(category=(DeprecationWarning, FutureWarning))
 def check_class_weight_balanced_classifiers(name, classifier_orig, X_train,
-                                            y_train, X_test, y_test, weights):
+                                            y_train, X_test, y_test):
     classifier = clone(classifier_orig)
     if hasattr(classifier, "n_iter"):
         classifier.set_params(n_iter=100)
