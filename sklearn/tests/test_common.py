@@ -23,7 +23,6 @@ from sklearn.utils.testing import ignore_warnings
 from sklearn.utils.testing import _named_check
 
 import sklearn
-from sklearn.datasets import make_classification 
 from sklearn.cluster.bicluster import BiclusterMixin
 
 from sklearn.linear_model.base import LinearClassifierMixin
