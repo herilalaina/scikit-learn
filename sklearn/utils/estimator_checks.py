@@ -1384,6 +1384,8 @@ def check_class_weight_classifiers(name, classifier_orig):
         # XXX: Generally can use 0.89 here. On Windows, LinearSVC gets
         #      0.88 (Issue #9111)
         assert_greater(np.mean(y_pred == 0), 0.87)
+        yield (check_class_weight_balanced_classifiers, name, classifier,
+               X_train, X_test, y_train, y_test)
 
 
 @ignore_warnings(category=(DeprecationWarning, FutureWarning))

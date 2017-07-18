@@ -120,30 +120,6 @@ def test_class_weight_balanced_linear_classifiers():
                            name), name, Classifier
 
 
-def test_class_weight_balanced_classifiers():
-    X, y = make_classification(n_samples=50, n_features=4,
-                               n_informative=2, n_redundant=2,
-                               weights=[0.2, 0.8])
-    train_samples = 30
-    X_train = X[:train_samples]
-    X_test = X[train_samples:]
-    y_train = y[:train_samples]
-    y_test = y[train_samples:]
-
-    classifiers = all_estimators(type_filter='classifier')
-
-    clean_warning_registry()
-    with warnings.catch_warnings(record=True):
-        _classifiers = [
-            (name, clazz)
-            for name, clazz in classifiers
-            if 'class_weight' in clazz().get_params().keys()]
-
-    for name, Classifier in _classifiers:
-        yield _named_check(check_class_weight_balanced_classifiers, name),
-        name, Classifier, X_train, y_train, X_test, y_test
-
-
 @ignore_warnings
 def test_import_all_consistency():
     # Smoke test to check that any name in a __all__ list is actually defined
